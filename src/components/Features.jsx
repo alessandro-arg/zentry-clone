@@ -1,3 +1,43 @@
+import { useRef, useState } from "react";
+
+const BentoTilt = ({ children, className = "" }) => {
+  const [transformStyle, setTransformStyle] = useState("");
+  const itemRef = useRef();
+
+  const handleMoueMove = (e) => {
+    if (!itemRef.current) return;
+
+    const { left, top, width, height } =
+      itemRef.current.getBoundingClientRect();
+
+    const relativeX = (e.clientX - left) / width;
+    const relativeY = (e.clientY - top) / height;
+
+    const tiltX = (relativeY - 0.5) * 10;
+    const tiltY = (relativeX - 0.5) * -10;
+
+    const newTransform = `perspective(700px) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+
+    setTransformStyle(newTransform);
+  };
+
+  const handleMoueLeave = () => {
+    setTransformStyle("");
+  };
+
+  return (
+    <div
+      ref={itemRef}
+      onMouseMove={handleMoueMove}
+      onMouseLeave={handleMoueLeave}
+      style={{ transform: transformStyle }}
+      className={className}
+    >
+      {children}
+    </div>
+  );
+};
+
 const BentoCard = ({ src, title, description }) => {
   return (
     <div className="relative size-full">
@@ -33,7 +73,7 @@ const Features = () => {
             agentic AI and blockchain lead the new economic paradigm
           </p>
         </div>
-        <div className="border-hsla relative mb-7 h-96 w-full overflow-hidden rounded-md md:h-[64vh]">
+        <BentoTilt className="border-hsla relative mb-7 h-96 w-full overflow-hidden rounded-md md:h-[64vh]">
           <BentoCard
             src="videos/feature-1.mp4"
             title={
@@ -43,10 +83,10 @@ const Features = () => {
             }
             description="The game of games app transforming moments across Web2 & Web3 titles into rewards."
           />
-        </div>
+        </BentoTilt>
 
         <div className="grid h-[135vh] grid-cols-2 grid-rows-3">
-          <div className="border-hsla rounded-md bento-tilt_1 mb-7 mr-7 row-span-1 md:col-span-1 md:row-span-2">
+          <BentoTilt className="border-hsla rounded-md bento-tilt_1 mb-7 mr-7 row-span-1 md:col-span-1 md:row-span-2">
             <BentoCard
               src="videos/feature-2.mp4"
               title={
@@ -56,9 +96,9 @@ const Features = () => {
               }
               description="The NFT collection merging Zentry's IP, AI, and gaming—pushing the boundaries of NFT innovation."
             />
-          </div>
+          </BentoTilt>
 
-          <div className="border-hsla rounded-md bento-titlt_1 row-span-1 ms-32 mb-7 md:col-span-1 md:ms-0">
+          <BentoTilt className="border-hsla rounded-md bento-titlt_1 row-span-1 ms-32 mb-7 md:col-span-1 md:ms-0">
             <BentoCard
               src="videos/feature-3.mp4"
               title={
@@ -68,8 +108,8 @@ const Features = () => {
               }
               description="The metagame portal uniting humans & AI to play, compete and earn."
             />
-          </div>
-          <div className="border-hsla rounded-md bento-titlt_1 me-14  mb-7 md:col-span-1 md:me-0">
+          </BentoTilt>
+          <BentoTilt className="border-hsla rounded-md bento-titlt_1 me-14  mb-7 md:col-span-1 md:me-0">
             <BentoCard
               src="videos/feature-4.mp4"
               title={
@@ -79,8 +119,8 @@ const Features = () => {
               }
               description="The agent of agents elevating agentic AI experience to be more fun and productive."
             />
-          </div>
-          <div className="bento-tilt_2 mr-7">
+          </BentoTilt>
+          <BentoTilt className="bento-tilt_2 mr-7">
             <div className="flex size-full flex-col justify-between p-5 bg-[#5724ff]">
               <h1 className="bento-title special-font max-w-64 text-black">
                 M<b>o</b>re <br />
@@ -94,8 +134,8 @@ const Features = () => {
                 />
               </div>
             </div>
-          </div>
-          <div className="bento-tilt_2">
+          </BentoTilt>
+          <BentoTilt className="bento-tilt_2">
             <video
               src="videos/feature-5.mp4"
               loop
@@ -103,7 +143,7 @@ const Features = () => {
               autoPlay
               className="size-full object-cover object-center"
             ></video>
-          </div>
+          </BentoTilt>
         </div>
       </div>
     </section>
