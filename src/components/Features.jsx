@@ -1,4 +1,4 @@
-const BentoCard = ({ src, title, description, isComingSoon }) => {
+const BentoCard = ({ src, title, description }) => {
   return (
     <div className="relative size-full">
       <video
@@ -8,7 +8,14 @@ const BentoCard = ({ src, title, description, isComingSoon }) => {
         autoPlay
         className="absolute left-0 top-0 size-full object-cover object-center"
       />
-      {title}
+      <div className="relative z-10 flex size-full flex-col justify-between p-5 text-blue-50">
+        <div>
+          <h1 className="bento-title special-font">{title}</h1>
+          {description && (
+            <p className="mt-3 max-w-64 text-xs md:text-base">{description}</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 };
@@ -31,12 +38,72 @@ const Features = () => {
             src="videos/feature-1.mp4"
             title={
               <>
-                Radie<b>n</b>t
+                Radia<b>n</b>t
               </>
             }
-            description="The game of games app transforming moments across Web2 & Web3 titles into rewards"
-            isComingSoon={true}
+            description="The game of games app transforming moments across Web2 & Web3 titles into rewards."
           />
+        </div>
+
+        <div className="grid h-[135vh] grid-cols-2 grid-rows-3">
+          <div className="border-hsla rounded-md bento-tilt_1 mb-7 mr-7 row-span-1 md:col-span-1 md:row-span-2">
+            <BentoCard
+              src="videos/feature-2.mp4"
+              title={
+                <>
+                  Zig<b>m</b>a
+                </>
+              }
+              description="The NFT collection merging Zentry's IP, AI, and gaming—pushing the boundaries of NFT innovation."
+            />
+          </div>
+
+          <div className="border-hsla rounded-md bento-titlt_1 row-span-1 ms-32 mb-7 md:col-span-1 md:ms-0">
+            <BentoCard
+              src="videos/feature-3.mp4"
+              title={
+                <>
+                  N<b>e</b>xus
+                </>
+              }
+              description="The metagame portal uniting humans & AI to play, compete and earn."
+            />
+          </div>
+          <div className="border-hsla rounded-md bento-titlt_1 me-14  mb-7 md:col-span-1 md:me-0">
+            <BentoCard
+              src="videos/feature-4.mp4"
+              title={
+                <>
+                  Az<b>u</b>l
+                </>
+              }
+              description="The agent of agents elevating agentic AI experience to be more fun and productive."
+            />
+          </div>
+          <div className="bento-tilt_2 mr-7">
+            <div className="flex size-full flex-col justify-between p-5 bg-[#5724ff]">
+              <h1 className="bento-title special-font max-w-64 text-black">
+                M<b>o</b>re <br />
+                Co<b>m</b>ing <br />S<b>o</b>on.
+              </h1>
+              <div className="w-full flex justify-end">
+                <img
+                  src="/img/zentry-symbol-black.png"
+                  alt="Logo"
+                  className="w-20"
+                />
+              </div>
+            </div>
+          </div>
+          <div className="bento-tilt_2">
+            <video
+              src="videos/feature-5.mp4"
+              loop
+              muted
+              autoPlay
+              className="size-full object-cover object-center"
+            ></video>
+          </div>
         </div>
       </div>
     </section>
